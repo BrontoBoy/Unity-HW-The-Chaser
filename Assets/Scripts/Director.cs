@@ -20,10 +20,14 @@ public class Director : MonoBehaviour
     
     public Vector3 GetDirectionToTarget(Transform target, float speed, float stopDistance = 0f)
     {
-        Vector3 direction = new Vector3 (target.position.x - stopDistance, target.position.y - stopDistance, 
-            target.position.z - stopDistance) - transform.position;
-        direction *= speed - stopDistance;
+            Vector3 direction = target.position - transform.position;
+            float distance = direction.magnitude;
+            
+            if (stopDistance > 0 && distance <= stopDistance)
+                return Vector3.zero;
+            
+            direction = direction.normalized * speed;
         
-        return direction;
+            return direction;
     }
 }

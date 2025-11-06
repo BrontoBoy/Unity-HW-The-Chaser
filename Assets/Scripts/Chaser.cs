@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Director))]
 public class Chaser : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _speed = 3f;
     [SerializeField] private float _stopDistance = 2f;
     [SerializeField] private Transform _target;
     
@@ -22,9 +22,9 @@ public class Chaser : MonoBehaviour
     {
         if (_rigidbody != null && _target != null)
         {
-            Vector3 direction = _director.GetDirectionToTarget(_target, _speed, _stopDistance);
-            
-            _rigidbody.linearVelocity = direction + Physics.gravity;
+            Vector3 velocity = _director.GetDirectionToTarget(_target, _speed, _stopDistance);
+            velocity.y = _rigidbody.linearVelocity.y;
+            _rigidbody.linearVelocity = velocity;
         }
     }
 }
