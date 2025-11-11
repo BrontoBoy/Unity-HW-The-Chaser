@@ -1,25 +1,25 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(Director))]
+[RequireComponent(typeof(Mover))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
     
     private CharacterController _characterController;
-    private Director _director;
+    private Mover _mover;
     
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-        _director = GetComponent<Director>();
+        _mover = GetComponent<Mover>();
     }
 
     private void Update()
     {
         if (_characterController != null)
         {
-            Vector3 direction = _director.GetDirection(_speed);
+            Vector3 direction = _mover.GetDirection(_speed);
 
             if (_characterController.isGrounded == true)
             {
